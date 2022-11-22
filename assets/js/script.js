@@ -30,7 +30,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // TODO: Add event listener and handler for flip and clear buttons
     flip.addEventListener("click", () => {
-        numOfFlips++;
+        coinSound.play();
+        let i = -1;
+        let anime = setInterval(() => {
+            coinImage.style.transform = `scaleX(${i})`;
+            i = -i;
+        }, 50);
+        setTimeout(() => {
+            clearInterval(anime);
+        }, 2000);
+        setTimeout(() => {
+                    numOfFlips++;
     
         // Flip Button Click Handler
         let rolledValue = Math.ceil(Math.random() * 6);
@@ -41,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // TODO: Update image and status message in the DOM
             coinImage.src = "/assets/images/penny-tails.jpg";
             message.textContent = "You Flipped Tails!";
-            head++;
+            tail++;
             
 
         } else {
@@ -49,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // TODO: Update image and status message in the DOM
             coinImage.src = "/assets/images/penny-heads.jpg";
             message.textContent = "You Flipped Heads!";
-            tail++;
+            head++;
            
         }
         
@@ -66,6 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
         tailPercentage = Math.round(tail / numOfFlips * 100);
         tailCount.textContent = tail;
         tailPercent.textContent = `${tailPercentage}%`;
+        }, 2000)
     });
 
     clear.addEventListener("click", () => {
